@@ -1,0 +1,49 @@
+# create data set S containing the data from set X at the respective frequencies specified by F
+# https://www.hackerrank.com/challenges/s10-interquartile-range/problem
+
+================================================
+
+# This is a super difficult take on this problem-- 
+
+import statistics as s
+import re
+
+n = int(input())
+
+num = list(str.split(input()))
+freq = list(map(int, str.split(input())))
+
+total = str([(a+' ')*b for a,b in zip(num, freq)])
+new = str.strip(re.sub('[,\'[\]]', '', total))
+new = ' '.join(new.split())
+new = sorted(list(map(int, str.split(new, ' '))))
+
+mid = sum(freq)//2
+q1 = s.median(new[:mid])
+q3 = s.median(new[-mid:])
+
+print('%.1f' %(q3-q1))
+
+
+******************************************************
+
+# Found an improved solution on discussion board, cleaned it up a bit
+
+import statistics as st
+
+n = int(input())
+data = list(map(int, input().split()))
+freq = list(map(int, input().split()))
+
+s = []
+for i in range(n):
+    s += [data[i]] * freq[i]
+N = sum(freq)
+s.sort()
+
+mid = sum(freq)//2
+q1 = s.median(new[:mid])
+q3 = s.median(new[-mid:])
+
+ir = round(float(q3-q1), 1)
+print(ir)
