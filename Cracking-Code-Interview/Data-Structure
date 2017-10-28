@@ -1,0 +1,37 @@
+# A kidnapper wrote a ransom note but is worried it will be traced back to him. 
+# He found a magazine and wants to know if he can cut out whole words from it and use them to create 
+# an untraceable replica of his ransom note. The words in his note are case-sensitive 
+# and he must use whole words available in the magazine, 
+# meaning he cannot use substrings or concatenation to create the words he needs.
+
+from collections import Counter
+
+def ransom_note(magazine, ransom):
+    r = Counter(ransom).most_common()
+    m = Counter(magazine).most_common()
+    ransom = {i[0]:i[1] for i in r}
+    mag = {i[0]:i[1] for i in m}
+    for i in ransom:
+        if i in mag:
+            if ransom[i] > mag[i]:
+                return False
+        else:
+            return False
+    return True
+    #if len([(a, b) for (a,b) in r for (c,d) in m if ((a==c) and (b<=d))]) == len(r):
+
+m, n = map(int, input().strip().split(' '))
+magazine = input().strip().split(' ')
+ransom = input().strip().split(' ')
+answer = ransom_note(magazine, ransom)
+if(answer):
+    print("Yes")
+else:
+    print("No")
+    
+********************************************
+
+from collections import Counter
+
+def ransom_note(magazine, rasom):
+    return (Counter(rasom) - Counter(magazine)) == {}
