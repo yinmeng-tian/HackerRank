@@ -1,0 +1,10 @@
+```python
+
+#Print the weighted mean on a new line. Your answer should be rounded to a scale of 1 decimal place
+
+x = int(input())
+num = list(map(int, str.split(input(), " ")))
+weight = list(map(int, str.split(input(), " ")))
+print("%.1f" %(sum(n*w for n,w in zip(num, weight)) / sum(weight)))   
+
+```
