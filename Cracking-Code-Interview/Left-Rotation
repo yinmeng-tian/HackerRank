@@ -1,0 +1,21 @@
+# Print a single line of n space-separated integers denoting the final state of the array after performing d left rotations.
+# a = array ; n = number of digits in array ; k = number of rotations
+
+def array_left_rotation(a, n, k):
+    for i in range(k):
+        a.append(a[i])
+    return a[-n:]
+            
+n, k = map(int, input().strip().split(' '))
+a = list(map(int, input().strip().split(' ')))
+answer = array_left_rotation(a, n, k);
+print(*answer, sep=' ')
+
+
+# More elegant solution:
+
+def array_left_rotation(a, n, k):
+    # k = k%n for when k > n
+    alist = list(a)
+    b = alist[k:]+alist[:k]
+    return b
