@@ -1,0 +1,42 @@
+# Executes string commands in user input
+# https://www.hackerrank.com/challenges/python-lists/submissions/code/57756654
+===============================================================================
+
+if __name__ == '__main__':
+    N = int(input())
+    alist = []
+    def list_op(x):
+        if 'insert' in x:
+            alist.insert(int(x[7]), int(x[9:]))
+        elif 'print' in x:
+            print(alist)
+        elif 'remove' in x:
+            alist.remove(int(x[7:]))
+        elif 'append' in x:
+            alist.append(int(x[7:]))
+        elif 'sort' in x:
+            alist.sort()
+        elif 'pop' in x:
+            alist.pop()
+        elif 'reverse' in x:
+            alist.reverse()
+        return list(map(int, alist))
+
+for i in range(N):
+    list_op(input())
+            
+            
+***********************************************************
+
+n = input()
+l = []
+for _ in range(n):
+    s = raw_input().split()
+    cmd = s[0]
+    args = s[1:]
+    if cmd !="print":
+        cmd += "("+ ",".join(args) +")"
+        eval("l."+cmd)
+    else:
+        print l
+
