@@ -1,0 +1,32 @@
+# The ratio of boys to girls for babies born in Russia is 1.09 1. 
+# If there is 1 child born per birth, what proportion of Russian families with exactly 6 children will have at least 3 boys?
+# https://www.hackerrank.com/challenges/s10-binomial-distribution-1/problem
+=============================================================================================================================
+
+
+from functools import reduce
+from operator import mul
+from fractions import Fraction
+
+def nCr(n, r):
+    return int(reduce(mul, (Fraction(n-i, i+1) for i in range(r)), 1))
+
+q = list(map(float,(str.split(input(), " "))))
+p = q[0] / (q[0] + q[1])
+
+print(round(sum((nCr(6, i) * p**i * (1-p) **(6-i)) for i in range(3, 7)), 3))
+
+********************************************************************************************************************************
+
+def fact(n):
+    return 1 if n == 0 else n*fact(n-1)
+
+def comb(n, x):
+    return fact(n) / (fact(x) * fact(n-x))
+
+def b(x, n, p):
+    return comb(n, x) * p**x * (1-p)**(n-x)
+
+l, r = list(map(float, input().split(" ")))
+odds = l / r
+print(round(sum([b(i, 6, odds / (1 + odds)) for i in range(3, 7)]), 3))
