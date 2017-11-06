@@ -1,0 +1,11 @@
+# https://www.hackerrank.com/challenges/s10-spearman-rank-correlation-coefficient/problem
+
+n = int(input())
+x = (list(map(float, str.split(input()))))
+y = (list(map(float, str.split(input(), " "))))
+
+xindex = [(sorted(x).index(k))+1 for j in x for k in sorted(x) if j ==k]
+yindex = [(sorted(y).index(k))+1 for j in y for k in sorted(y) if j ==k]
+
+diff = sum([(x-y)**2 for x, y in zip(xindex, yindex)])
+print(round(1- (6*diff)/(n*(n**2-1)), 3))
